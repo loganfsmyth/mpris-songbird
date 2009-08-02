@@ -1,0 +1,10 @@
+defaults/.svn/*
+defaults/preferences/.svn/*
+platform/.svn/*
+platform/Linux_x86-gcc3/.svn/*
+platform/Linux_x86-gcc3/components/.svn/*
+platform/Linux_x86_64-gcc3/.svn/*
+platform/Linux_x86_64-gcc3/components/.svn/*
+components/.svn/*
+chrome/.svn/*
+chrome/content/.svn/*

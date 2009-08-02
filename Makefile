@@ -24,7 +24,7 @@ package:
 	cp -f src/icon.png chrome/content/
 	mkdir -p defaults/preferences
 	cp -f src/defaults.js defaults/preferences/
-	zip -r Mpris-$(VERSION).xpi components/ chrome/ platform/ defaults/ install.rdf chrome.manifest
+	zip -r Mpris-$(VERSION).xpi components/ chrome/ platform/ defaults/ install.rdf chrome.manifest -x@zip-exclude.txt
 	
 build32: build
 	mkdir -p platform/Linux_x86-gcc3/components
