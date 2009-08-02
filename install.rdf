@@ -2,9 +2,9 @@
 <RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:em="http://www.mozilla.org/2004/em-rdf#"
      xmlns:songbird="http://www.songbirdnest.com/2007/addon-metadata-rdf#">
   <Description about="urn:mozilla:install-manifest">
-    <em:id>{1332dba8-bade-4111-b097-f09f10f03ef2}</em:id>
+    <em:id>{0a067f25-b5fa-4530-9396-fc7088a05415}</em:id>
     <em:type>2</em:type>
-    <em:name>MPRIS (64-bit)</em:name>
+    <em:name>MPRIS</em:name>
     <em:version>0.1.2</em:version>
     <em:creator>Logan Smyth</em:creator>
     <em:description>Adds support for the MPRIS media player communication/control protocol</em:description>
