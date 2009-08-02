@@ -346,24 +346,35 @@ sbMprisPlugin.prototype = {
     
     var prefix = 'http://songbirdnest.com/data/1.0#';
     var track_info = this.seq.view.getItemByIndex(track_num);
+    var str;
     
-    dump(track_info.getProperties());
+    //~ dump(track_info.getProperties());
     
     this.dbus.openDictEntryArray();
     if(typeof track_info.getProperty(prefix+'contentURL') == 'string'){
-      this.dbus.setDictSSEntryArg("location", decodeURI(track_info.getProperty(prefix+'contentURL')));
+      str = decodeURI(track_info.getProperty(prefix+'contentURL'));
+      dump(str);
+      this.dbus.setDictSSEntryArg("location", str);
     }
     if(typeof track_info.getProperty(prefix+'trackName') == 'string'){
-      this.dbus.setDictSSEntryArg("title", track_info.getProperty(prefix+'trackName'));
+      str = track_info.getProperty(prefix+'trackName');
+      dump(str);
+      this.dbus.setDictSSEntryArg("title", str);
     }
     if(typeof track_info.getProperty(prefix+'artistName') == 'string'){
-      this.dbus.setDictSSEntryArg("artist", track_info.getProperty(prefix+'artistName'));
+      str = track_info.getProperty(prefix+'artistName');
+      dump(str);
+      this.dbus.setDictSSEntryArg("artist", str);
     }
     if(typeof track_info.getProperty(prefix+'albumName') == 'string'){
-      this.dbus.setDictSSEntryArg("album", track_info.getProperty(prefix+'albumName'));
+      str = track_info.getProperty(prefix+'albumName');
+      dump(str);
+      this.dbus.setDictSSEntryArg("album", str);
     }
     if(typeof track_info.getProperty(prefix+'trackNumber') == 'string'){
-      this.dbus.setDictSSEntryArg("tracknumber", track_info.getProperty(prefix+'trackNumber'));    
+      str = track_info.getProperty(prefix+'trackNumber');
+      dump(str);
+      this.dbus.setDictSSEntryArg("tracknumber", str);    
     }
     
     if(typeof track_info.getProperty(prefix+'duration') == 'string'){
@@ -372,10 +383,14 @@ sbMprisPlugin.prototype = {
     }
     
     if(typeof track_info.getProperty(prefix+'genre') == 'string'){
-      this.dbus.setDictSSEntryArg("genre", track_info.getProperty(prefix+'genre'));
+      str = track_info.getProperty(prefix+'genre');
+      dump(str);
+      this.dbus.setDictSSEntryArg("genre", str);
     }
     if(typeof track_info.getProperty(prefix+'comment') == 'string'){
-      this.dbus.setDictSSEntryArg("comment", track_info.getProperty(prefix+'comment'));
+      str = track_info.getProperty(prefix+'comment');
+      dump(str);
+      this.dbus.setDictSSEntryArg("comment", str);
     }
     
     if(typeof track_info.getProperty(prefix+'year') == 'string'){
