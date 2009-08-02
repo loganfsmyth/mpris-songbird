@@ -12,7 +12,7 @@
 Components.utils.import("resource://gre/modules/XPCOMUtils.jsm"); 
 
 const CLASS_ID = Components.ID("{03638fa0-5327-11de-8a39-0800200c9a66}");
-const CLASS_NAME = "sbMprisHandler";
+const CLASS_NAME = "sbMprisPlugin";
 const CONTRACT_ID = "@logansmyth.com/Songbird/MprisPlugin;1";
 
 
@@ -491,6 +491,9 @@ sbMprisPlugin.prototype = {
       
       this.dbus.setInt32Arg(caps);
   },
+  
+  
+  
 };
 sbMprisPlugin.prototype.constructor = sbMprisPlugin;
 

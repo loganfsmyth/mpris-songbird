@@ -102,6 +102,10 @@ class NS_NO_VTABLE NS_SCRIPTABLE sbIMprisPlugin : public sbIMethodHandler {
 
   NS_DECLARE_STATIC_IID_ACCESSOR(SBIMPRISPLUGIN_IID)
 
+  /* attribute sbIDbusConnection dbus; */
+  NS_SCRIPTABLE NS_IMETHOD GetDbus(sbIDbusConnection * *aDbus) = 0;
+  NS_SCRIPTABLE NS_IMETHOD SetDbus(sbIDbusConnection * aDbus) = 0;
+
   /* void init (); */
   NS_SCRIPTABLE NS_IMETHOD Init(void) = 0;
 
@@ -126,6 +130,8 @@ class NS_NO_VTABLE NS_SCRIPTABLE sbIMprisPlugin : public sbIMethodHandler {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_SBIMPRISPLUGIN \
+  NS_SCRIPTABLE NS_IMETHOD GetDbus(sbIDbusConnection * *aDbus); \
+  NS_SCRIPTABLE NS_IMETHOD SetDbus(sbIDbusConnection * aDbus); \
   NS_SCRIPTABLE NS_IMETHOD Init(void); \
   NS_SCRIPTABLE NS_IMETHOD GetMetadata(void); \
   NS_SCRIPTABLE NS_IMETHOD GetStatus(void); \
@@ -135,6 +141,8 @@ class NS_NO_VTABLE NS_SCRIPTABLE sbIMprisPlugin : public sbIMethodHandler {
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_SBIMPRISPLUGIN(_to) \
+  NS_SCRIPTABLE NS_IMETHOD GetDbus(sbIDbusConnection * *aDbus) { return _to GetDbus(aDbus); } \
+  NS_SCRIPTABLE NS_IMETHOD SetDbus(sbIDbusConnection * aDbus) { return _to SetDbus(aDbus); } \
   NS_SCRIPTABLE NS_IMETHOD Init(void) { return _to Init(); } \
   NS_SCRIPTABLE NS_IMETHOD GetMetadata(void) { return _to GetMetadata(); } \
   NS_SCRIPTABLE NS_IMETHOD GetStatus(void) { return _to GetStatus(); } \
@@ -144,6 +152,8 @@ class NS_NO_VTABLE NS_SCRIPTABLE sbIMprisPlugin : public sbIMethodHandler {
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
 #define NS_FORWARD_SAFE_SBIMPRISPLUGIN(_to) \
+  NS_SCRIPTABLE NS_IMETHOD GetDbus(sbIDbusConnection * *aDbus) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetDbus(aDbus); } \
+  NS_SCRIPTABLE NS_IMETHOD SetDbus(sbIDbusConnection * aDbus) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetDbus(aDbus); } \
   NS_SCRIPTABLE NS_IMETHOD Init(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->Init(); } \
   NS_SCRIPTABLE NS_IMETHOD GetMetadata(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetMetadata(); } \
   NS_SCRIPTABLE NS_IMETHOD GetStatus(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetStatus(); } \
@@ -181,6 +191,16 @@ sbMprisPlugin::sbMprisPlugin()
 sbMprisPlugin::~sbMprisPlugin()
 {
   /* destructor code */
+}
+
+/* attribute sbIDbusConnection dbus; */
+NS_IMETHODIMP sbMprisPlugin::GetDbus(sbIDbusConnection * *aDbus)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP sbMprisPlugin::SetDbus(sbIDbusConnection * aDbus)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
 }
 
 /* void init (); */

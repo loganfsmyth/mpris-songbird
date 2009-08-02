@@ -18,19 +18,44 @@ if (typeof Mpris == 'undefined') {
 
 
 Mpris.Controller = {
+  prefs: null,
+  debug_mode: false,
+  handler: null,
+
   onLoad: function() {
 
     this.handler = Components.classes['@logansmyth.com/Songbird/MprisPlugin;1'].createInstance(Components.interfaces.sbIMprisPlugin);
+
+    this.prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("mpris.");
+    this.prefs.QueryInterface(Components.interfaces.nsIPrefBranch2);
+    this.prefs.addObserver("", this, false);
+    this.debug_mode = this.prefs.getBoolPref("debug_mode");
   
     this.handler.init();
+    this.handler.dbus.setDebugMode(this.debug_mode);
 
     // initialization code
     this._initialized = true;
     
   },
   onUnLoad: function() {
+    this.prefs.removeObserver("", this);
     this._initialized = false;
   },
+  
+  observe: function(subject, topic, data) {
+    alert(subject);
+    alert(topic);
+    alert(data);
+     if (topic != "nsPref:changed") return;
+     switch(data) {
+       case "debug_mode":
+         this.debug_mode = this.prefs.getBoolPref("debug_mode");
+	 this.handler.dbus.setDebugMode(this.debug_mode);
+         break;
+     }
+   },
+
 };
 
 window.addEventListener("load", function(e) { Mpris.Controller.onLoad(e); }, false);

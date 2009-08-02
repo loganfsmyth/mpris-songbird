@@ -23,6 +23,7 @@ interface sbIMethodHandler : nsISupports
 [scriptable, uuid(a8159f8d-7970-40d0-bd08-8d0adf69e435)]
 interface sbIMprisPlugin : sbIMethodHandler
 {
+  attribute sbIDbusConnection dbus;
   void init();
   void getMetadata();
   void getStatus();

@@ -382,5 +382,8 @@ NS_IMETHODIMP sbDbusConnection::CloseStruct()
 /* void setDebugMode (in boolean debug_mode); */
 NS_IMETHODIMP sbDbusConnection::SetDebugMode(PRBool debug_mode)
 {
+    if(debug_mode) cout << "DEBUG MODE" << endl;
+    else cout << "NOT DEBUG MODE" << endl;
+    
     return NS_OK;
 }
