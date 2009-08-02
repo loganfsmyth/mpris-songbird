@@ -353,27 +353,27 @@ sbMprisPlugin.prototype = {
     this.dbus.openDictEntryArray();
     if(typeof track_info.getProperty(prefix+'contentURL') == 'string'){
       str = decodeURI(track_info.getProperty(prefix+'contentURL'));
-      dump(str);
+      //~ dump(str);
       this.dbus.setDictSSEntryArg("location", str);
     }
     if(typeof track_info.getProperty(prefix+'trackName') == 'string'){
       str = track_info.getProperty(prefix+'trackName');
-      dump(str);
+      //~ dump(str);
       this.dbus.setDictSSEntryArg("title", str);
     }
     if(typeof track_info.getProperty(prefix+'artistName') == 'string'){
       str = track_info.getProperty(prefix+'artistName');
-      dump(str);
+      //~ dump(str);
       this.dbus.setDictSSEntryArg("artist", str);
     }
     if(typeof track_info.getProperty(prefix+'albumName') == 'string'){
       str = track_info.getProperty(prefix+'albumName');
-      dump(str);
+      //~ dump(str);
       this.dbus.setDictSSEntryArg("album", str);
     }
     if(typeof track_info.getProperty(prefix+'trackNumber') == 'string'){
       str = track_info.getProperty(prefix+'trackNumber');
-      dump(str);
+      //~ dump(str);
       this.dbus.setDictSSEntryArg("tracknumber", str);    
     }
     
@@ -384,12 +384,12 @@ sbMprisPlugin.prototype = {
     
     if(typeof track_info.getProperty(prefix+'genre') == 'string'){
       str = track_info.getProperty(prefix+'genre');
-      dump(str);
+      //~ dump(str);
       this.dbus.setDictSSEntryArg("genre", str);
     }
     if(typeof track_info.getProperty(prefix+'comment') == 'string'){
       str = track_info.getProperty(prefix+'comment');
-      dump(str);
+      //~ dump(str);
       this.dbus.setDictSSEntryArg("comment", str);
     }
     
