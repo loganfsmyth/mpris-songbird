@@ -380,7 +380,7 @@ NS_IMETHODIMP sbDbusConnection::SetDictSIEntryArg(const char *key, PRUint32 val)
       dbus_message_iter_close_container(&entry_obj, &var_obj);
     dbus_message_iter_close_container(array_obj, &entry_obj);
     
-    if(DEBUG || debug_mode) cout << "Set dict" << endl;
+    if(DEBUG || debug_mode) cout << "Set dict SI entry" << endl;
   
     return NS_OK;
 }

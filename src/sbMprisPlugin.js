@@ -347,13 +347,14 @@ sbMprisPlugin.prototype = {
     var prefix = 'http://songbirdnest.com/data/1.0#';
     var track_info = this.seq.view.getItemByIndex(track_num);
     
+    dump(track_info.getProperties());
+    
     this.dbus.openDictEntryArray();
     if(typeof track_info.getProperty(prefix+'contentURL') == 'string'){
       this.dbus.setDictSSEntryArg("location", decodeURI(track_info.getProperty(prefix+'contentURL')));
     }
     if(typeof track_info.getProperty(prefix+'trackName') == 'string'){
       this.dbus.setDictSSEntryArg("title", track_info.getProperty(prefix+'trackName'));
-      
     }
     if(typeof track_info.getProperty(prefix+'artistName') == 'string'){
       this.dbus.setDictSSEntryArg("artist", track_info.getProperty(prefix+'artistName'));
