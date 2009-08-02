@@ -24,7 +24,8 @@ interface sbIMethodHandler : nsISupports
 interface sbIMprisPlugin : sbIMethodHandler
 {
   attribute sbIDbusConnection dbus;
-  void init();
+  attribute boolean debug_mode;
+  void init(in boolean debug);
   void getMetadata();
   void getStatus();
   void getCaps();
@@ -36,7 +37,9 @@ interface sbIMprisPlugin : sbIMethodHandler
 [scriptable, uuid(4c809340-0f6f-4122-b242-d4e900bed92b)]
 interface sbIDbusConnection : nsISupports
 {
-  long init(in string name);
+  attribute boolean debug_mode;
+    
+  long init(in string name, in boolean debug);
   void setMatch(in string match);
   void check();
   long end();
@@ -63,7 +66,5 @@ interface sbIDbusConnection : nsISupports
 
   void openStruct();
   void closeStruct();
-  
-  void setDebugMode(in boolean debug_status);
 
 };

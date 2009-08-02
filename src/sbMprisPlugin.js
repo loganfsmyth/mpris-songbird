@@ -122,10 +122,13 @@ sbMprisPlugin.prototype = {
   contractID: CONTRACT_ID,
   QueryInterface: XPCOMUtils.generateQI([Components.interfaces.sbIMprisPlugin, Components.interfaces.sbIMethodHandler]),
   dbus: null,
-  init: function(){
+  debug_mode: false,
+  
+  init: function(debug){
+    this.debug_mode = debug;
     
     this.dbus = Components.classes['@logansmyth.com/Songbird/DbusConnection;1'].createInstance(Components.interfaces.sbIDbusConnection);
-    this.dbus.init("org.mpris.songbird");
+    this.dbus.init("org.mpris.songbird", this.debug_mode);
     this.dbus.setMatch("type='signal',interface='org.freedesktop.MediaPlayer'");
     this.dbus.setMethodHandler(this);
 

@@ -31,8 +31,8 @@ Mpris.Controller = {
     this.prefs.addObserver("", this, false);
     this.debug_mode = this.prefs.getBoolPref("debug_mode");
   
-    this.handler.init();
-    this.handler.dbus.setDebugMode(this.debug_mode);
+    this.handler.init(this.debug_mode);
+    //~ this.handler.dbus.setDebugMode(this.debug_mode);
 
   },
   onUnLoad: function() {
@@ -44,6 +44,8 @@ Mpris.Controller = {
      switch(data) {
        case "debug_mode":
          this.debug_mode = this.prefs.getBoolPref("debug_mode");
+	 
+	 this.handler.debug_mode = this.debug_mode;
 	 this.handler.dbus.setDebugMode(this.debug_mode);
          break;
      }

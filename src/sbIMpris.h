@@ -106,8 +106,12 @@ class NS_NO_VTABLE NS_SCRIPTABLE sbIMprisPlugin : public sbIMethodHandler {
   NS_SCRIPTABLE NS_IMETHOD GetDbus(sbIDbusConnection * *aDbus) = 0;
   NS_SCRIPTABLE NS_IMETHOD SetDbus(sbIDbusConnection * aDbus) = 0;
 
-  /* void init (); */
-  NS_SCRIPTABLE NS_IMETHOD Init(void) = 0;
+  /* attribute boolean debug_mode; */
+  NS_SCRIPTABLE NS_IMETHOD GetDebug_mode(PRBool *aDebug_mode) = 0;
+  NS_SCRIPTABLE NS_IMETHOD SetDebug_mode(PRBool aDebug_mode) = 0;
+
+  /* void init (in boolean debug); */
+  NS_SCRIPTABLE NS_IMETHOD Init(PRBool debug) = 0;
 
   /* void getMetadata (); */
   NS_SCRIPTABLE NS_IMETHOD GetMetadata(void) = 0;
@@ -132,7 +136,9 @@ class NS_NO_VTABLE NS_SCRIPTABLE sbIMprisPlugin : public sbIMethodHandler {
 #define NS_DECL_SBIMPRISPLUGIN \
   NS_SCRIPTABLE NS_IMETHOD GetDbus(sbIDbusConnection * *aDbus); \
   NS_SCRIPTABLE NS_IMETHOD SetDbus(sbIDbusConnection * aDbus); \
-  NS_SCRIPTABLE NS_IMETHOD Init(void); \
+  NS_SCRIPTABLE NS_IMETHOD GetDebug_mode(PRBool *aDebug_mode); \
+  NS_SCRIPTABLE NS_IMETHOD SetDebug_mode(PRBool aDebug_mode); \
+  NS_SCRIPTABLE NS_IMETHOD Init(PRBool debug); \
   NS_SCRIPTABLE NS_IMETHOD GetMetadata(void); \
   NS_SCRIPTABLE NS_IMETHOD GetStatus(void); \
   NS_SCRIPTABLE NS_IMETHOD GetCaps(void); \
@@ -143,7 +149,9 @@ class NS_NO_VTABLE NS_SCRIPTABLE sbIMprisPlugin : public sbIMethodHandler {
 #define NS_FORWARD_SBIMPRISPLUGIN(_to) \
   NS_SCRIPTABLE NS_IMETHOD GetDbus(sbIDbusConnection * *aDbus) { return _to GetDbus(aDbus); } \
   NS_SCRIPTABLE NS_IMETHOD SetDbus(sbIDbusConnection * aDbus) { return _to SetDbus(aDbus); } \
-  NS_SCRIPTABLE NS_IMETHOD Init(void) { return _to Init(); } \
+  NS_SCRIPTABLE NS_IMETHOD GetDebug_mode(PRBool *aDebug_mode) { return _to GetDebug_mode(aDebug_mode); } \
+  NS_SCRIPTABLE NS_IMETHOD SetDebug_mode(PRBool aDebug_mode) { return _to SetDebug_mode(aDebug_mode); } \
+  NS_SCRIPTABLE NS_IMETHOD Init(PRBool debug) { return _to Init(debug); } \
   NS_SCRIPTABLE NS_IMETHOD GetMetadata(void) { return _to GetMetadata(); } \
   NS_SCRIPTABLE NS_IMETHOD GetStatus(void) { return _to GetStatus(); } \
   NS_SCRIPTABLE NS_IMETHOD GetCaps(void) { return _to GetCaps(); } \
@@ -154,7 +162,9 @@ class NS_NO_VTABLE NS_SCRIPTABLE sbIMprisPlugin : public sbIMethodHandler {
 #define NS_FORWARD_SAFE_SBIMPRISPLUGIN(_to) \
   NS_SCRIPTABLE NS_IMETHOD GetDbus(sbIDbusConnection * *aDbus) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetDbus(aDbus); } \
   NS_SCRIPTABLE NS_IMETHOD SetDbus(sbIDbusConnection * aDbus) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetDbus(aDbus); } \
-  NS_SCRIPTABLE NS_IMETHOD Init(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->Init(); } \
+  NS_SCRIPTABLE NS_IMETHOD GetDebug_mode(PRBool *aDebug_mode) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetDebug_mode(aDebug_mode); } \
+  NS_SCRIPTABLE NS_IMETHOD SetDebug_mode(PRBool aDebug_mode) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetDebug_mode(aDebug_mode); } \
+  NS_SCRIPTABLE NS_IMETHOD Init(PRBool debug) { return !_to ? NS_ERROR_NULL_POINTER : _to->Init(debug); } \
   NS_SCRIPTABLE NS_IMETHOD GetMetadata(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetMetadata(); } \
   NS_SCRIPTABLE NS_IMETHOD GetStatus(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetStatus(); } \
   NS_SCRIPTABLE NS_IMETHOD GetCaps(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetCaps(); } \
@@ -203,8 +213,18 @@ NS_IMETHODIMP sbMprisPlugin::SetDbus(sbIDbusConnection * aDbus)
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* void init (); */
-NS_IMETHODIMP sbMprisPlugin::Init()
+/* attribute boolean debug_mode; */
+NS_IMETHODIMP sbMprisPlugin::GetDebug_mode(PRBool *aDebug_mode)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP sbMprisPlugin::SetDebug_mode(PRBool aDebug_mode)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void init (in boolean debug); */
+NS_IMETHODIMP sbMprisPlugin::Init(PRBool debug)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
@@ -255,8 +275,12 @@ class NS_NO_VTABLE NS_SCRIPTABLE sbIDbusConnection : public nsISupports {
 
   NS_DECLARE_STATIC_IID_ACCESSOR(SBIDBUSCONNECTION_IID)
 
-  /* long init (in string name); */
-  NS_SCRIPTABLE NS_IMETHOD Init(const char *name, PRInt32 *_retval) = 0;
+  /* attribute boolean debug_mode; */
+  NS_SCRIPTABLE NS_IMETHOD GetDebug_mode(PRBool *aDebug_mode) = 0;
+  NS_SCRIPTABLE NS_IMETHOD SetDebug_mode(PRBool aDebug_mode) = 0;
+
+  /* long init (in string name, in boolean debug); */
+  NS_SCRIPTABLE NS_IMETHOD Init(const char *name, PRBool debug, PRInt32 *_retval) = 0;
 
   /* void setMatch (in string match); */
   NS_SCRIPTABLE NS_IMETHOD SetMatch(const char *match) = 0;
@@ -315,16 +339,15 @@ class NS_NO_VTABLE NS_SCRIPTABLE sbIDbusConnection : public nsISupports {
   /* void closeStruct (); */
   NS_SCRIPTABLE NS_IMETHOD CloseStruct(void) = 0;
 
-  /* void setDebugMode (in boolean debug_status); */
-  NS_SCRIPTABLE NS_IMETHOD SetDebugMode(PRBool debug_status) = 0;
-
 };
 
   NS_DEFINE_STATIC_IID_ACCESSOR(sbIDbusConnection, SBIDBUSCONNECTION_IID)
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_SBIDBUSCONNECTION \
-  NS_SCRIPTABLE NS_IMETHOD Init(const char *name, PRInt32 *_retval); \
+  NS_SCRIPTABLE NS_IMETHOD GetDebug_mode(PRBool *aDebug_mode); \
+  NS_SCRIPTABLE NS_IMETHOD SetDebug_mode(PRBool aDebug_mode); \
+  NS_SCRIPTABLE NS_IMETHOD Init(const char *name, PRBool debug, PRInt32 *_retval); \
   NS_SCRIPTABLE NS_IMETHOD SetMatch(const char *match); \
   NS_SCRIPTABLE NS_IMETHOD Check(void); \
   NS_SCRIPTABLE NS_IMETHOD End(PRInt32 *_retval); \
@@ -343,12 +366,13 @@ class NS_NO_VTABLE NS_SCRIPTABLE sbIDbusConnection : public nsISupports {
   NS_SCRIPTABLE NS_IMETHOD OpenDictEntryArray(void); \
   NS_SCRIPTABLE NS_IMETHOD CloseDictEntryArray(void); \
   NS_SCRIPTABLE NS_IMETHOD OpenStruct(void); \
-  NS_SCRIPTABLE NS_IMETHOD CloseStruct(void); \
-  NS_SCRIPTABLE NS_IMETHOD SetDebugMode(PRBool debug_status); 
+  NS_SCRIPTABLE NS_IMETHOD CloseStruct(void); 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_SBIDBUSCONNECTION(_to) \
-  NS_SCRIPTABLE NS_IMETHOD Init(const char *name, PRInt32 *_retval) { return _to Init(name, _retval); } \
+  NS_SCRIPTABLE NS_IMETHOD GetDebug_mode(PRBool *aDebug_mode) { return _to GetDebug_mode(aDebug_mode); } \
+  NS_SCRIPTABLE NS_IMETHOD SetDebug_mode(PRBool aDebug_mode) { return _to SetDebug_mode(aDebug_mode); } \
+  NS_SCRIPTABLE NS_IMETHOD Init(const char *name, PRBool debug, PRInt32 *_retval) { return _to Init(name, debug, _retval); } \
   NS_SCRIPTABLE NS_IMETHOD SetMatch(const char *match) { return _to SetMatch(match); } \
   NS_SCRIPTABLE NS_IMETHOD Check(void) { return _to Check(); } \
   NS_SCRIPTABLE NS_IMETHOD End(PRInt32 *_retval) { return _to End(_retval); } \
@@ -367,12 +391,13 @@ class NS_NO_VTABLE NS_SCRIPTABLE sbIDbusConnection : public nsISupports {
   NS_SCRIPTABLE NS_IMETHOD OpenDictEntryArray(void) { return _to OpenDictEntryArray(); } \
   NS_SCRIPTABLE NS_IMETHOD CloseDictEntryArray(void) { return _to CloseDictEntryArray(); } \
   NS_SCRIPTABLE NS_IMETHOD OpenStruct(void) { return _to OpenStruct(); } \
-  NS_SCRIPTABLE NS_IMETHOD CloseStruct(void) { return _to CloseStruct(); } \
-  NS_SCRIPTABLE NS_IMETHOD SetDebugMode(PRBool debug_status) { return _to SetDebugMode(debug_status); } 
+  NS_SCRIPTABLE NS_IMETHOD CloseStruct(void) { return _to CloseStruct(); } 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
 #define NS_FORWARD_SAFE_SBIDBUSCONNECTION(_to) \
-  NS_SCRIPTABLE NS_IMETHOD Init(const char *name, PRInt32 *_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->Init(name, _retval); } \
+  NS_SCRIPTABLE NS_IMETHOD GetDebug_mode(PRBool *aDebug_mode) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetDebug_mode(aDebug_mode); } \
+  NS_SCRIPTABLE NS_IMETHOD SetDebug_mode(PRBool aDebug_mode) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetDebug_mode(aDebug_mode); } \
+  NS_SCRIPTABLE NS_IMETHOD Init(const char *name, PRBool debug, PRInt32 *_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->Init(name, debug, _retval); } \
   NS_SCRIPTABLE NS_IMETHOD SetMatch(const char *match) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetMatch(match); } \
   NS_SCRIPTABLE NS_IMETHOD Check(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->Check(); } \
   NS_SCRIPTABLE NS_IMETHOD End(PRInt32 *_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->End(_retval); } \
@@ -391,8 +416,7 @@ class NS_NO_VTABLE NS_SCRIPTABLE sbIDbusConnection : public nsISupports {
   NS_SCRIPTABLE NS_IMETHOD OpenDictEntryArray(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->OpenDictEntryArray(); } \
   NS_SCRIPTABLE NS_IMETHOD CloseDictEntryArray(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->CloseDictEntryArray(); } \
   NS_SCRIPTABLE NS_IMETHOD OpenStruct(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->OpenStruct(); } \
-  NS_SCRIPTABLE NS_IMETHOD CloseStruct(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->CloseStruct(); } \
-  NS_SCRIPTABLE NS_IMETHOD SetDebugMode(PRBool debug_status) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetDebugMode(debug_status); } 
+  NS_SCRIPTABLE NS_IMETHOD CloseStruct(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->CloseStruct(); } 
 
 #if 0
 /* Use the code below as a template for the implementation class for this interface. */
@@ -426,8 +450,18 @@ sbDbusConnection::~sbDbusConnection()
   /* destructor code */
 }
 
-/* long init (in string name); */
-NS_IMETHODIMP sbDbusConnection::Init(const char *name, PRInt32 *_retval)
+/* attribute boolean debug_mode; */
+NS_IMETHODIMP sbDbusConnection::GetDebug_mode(PRBool *aDebug_mode)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+NS_IMETHODIMP sbDbusConnection::SetDebug_mode(PRBool aDebug_mode)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* long init (in string name, in boolean debug); */
+NS_IMETHODIMP sbDbusConnection::Init(const char *name, PRBool debug, PRInt32 *_retval)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
@@ -542,12 +576,6 @@ NS_IMETHODIMP sbDbusConnection::OpenStruct()
 
 /* void closeStruct (); */
 NS_IMETHODIMP sbDbusConnection::CloseStruct()
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* void setDebugMode (in boolean debug_status); */
-NS_IMETHODIMP sbDbusConnection::SetDebugMode(PRBool debug_status)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }

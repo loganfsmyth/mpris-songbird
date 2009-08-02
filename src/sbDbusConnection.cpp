@@ -31,13 +31,34 @@ sbDbusConnection::~sbDbusConnection()
   /* destructor code */
 }
 
-/* long init (in string name); */
-NS_IMETHODIMP sbDbusConnection::Init(const char *name, PRInt32 *_retval)
+
+/* attribute boolean debug_mode; */
+NS_IMETHODIMP sbDbusConnection::GetDebug_mode(PRBool *aDebug_mode)
 {
-    debug_mode = false;
+    *aDebug_mode = debug_mode;
+    return NS_OK;
+}
+NS_IMETHODIMP sbDbusConnection::SetDebug_mode(PRBool aDebug_mode)
+{
+    
+    if(aDebug_mode) cout << "MPRIS: DEBUG MODE Set" << endl;
+    else cout << "MPRIS: DEBUG MODE unSet" << endl;
+    
+    debug_mode = aDebug_mode;
+    return NS_OK;
+}
+
+
+/* long init (in string name); */
+NS_IMETHODIMP sbDbusConnection::Init(const char *name, PRBool debug, PRInt32 *_retval)
+{
+    debug_mode = debug;
+    if(debug_mode) cout << "-----------MPRIS: DEBUG MODE------------" << endl;
     
     *_retval = 0;
     DBusError error;
+    
+    if(DEBUG || debug_mode) cout << "Initializing DBus" << endl;
     
     dbus_error_init (&error);
     conn = dbus_bus_get (DBUS_BUS_SESSION, &error);
@@ -47,12 +68,15 @@ NS_IMETHODIMP sbDbusConnection::Init(const char *name, PRInt32 *_retval)
       *_retval = 1;
     }
 
+    if(DEBUG || debug_mode) cout << "Requesting Name on DBus" << endl;
     dbus_bus_request_name(conn, name, 0, &error);
     if (dbus_error_is_set (&error)) {
       if(DEBUG_CERR || debug_mode) cerr <<  "Mpris Module: " << error.name << ": " << error.message;
       dbus_error_free(&error); 
       *_retval = 1;
     }
+    
+    if(DEBUG || debug_mode) cout << "Flushing" << endl;
     
     dbus_connection_flush(conn);
     if(DEBUG || debug_mode) cout << "End Init()" << endl;
@@ -64,9 +88,19 @@ NS_IMETHODIMP sbDbusConnection::Init(const char *name, PRInt32 *_retval)
 NS_IMETHODIMP sbDbusConnection::SetMatch(const char *match)
 {
     DBusError error;
+    dbus_error_init (&error);
+    if(DEBUG || debug_mode) cout << "Setting match " << match << endl;
   
       /* listening to messages from all objects as no path is specified */
     dbus_bus_add_match (conn, match, &error);
+    //~ dbus_bus_add_match (conn, match, NULL);
+    
+    if (dbus_error_is_set (&error)) {
+      if(DEBUG_CERR || debug_mode) cerr <<  "Match Error: " << error.name << ": " << error.message;
+      dbus_error_free(&error); 
+    }
+    
+    
     dbus_connection_flush(conn);
   
     if(DEBUG || debug_mode) cout << "DBus Connection Init" << endl;
@@ -410,17 +444,5 @@ NS_IMETHODIMP sbDbusConnection::CloseStruct()
     dbus_message_iter_close_container(args, new_args);
     if(DEBUG || debug_mode) cout << "Struct closed" << endl;
   
-    return NS_OK;
-}
-
-
-/* void setDebugMode (in boolean debug_mode); */
-NS_IMETHODIMP sbDbusConnection::SetDebugMode(PRBool debug_status)
-{
-    if(debug_status) cout << "MPRIS: DEBUG MODE" << endl;
-    //~ else cout << "NOT DEBUG MODE" << endl;
-    
-    debug_mode = debug_status;
-    
     return NS_OK;
 }
