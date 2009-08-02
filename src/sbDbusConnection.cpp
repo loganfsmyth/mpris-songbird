@@ -356,7 +356,8 @@ NS_IMETHODIMP sbDbusConnection::SetDictSSEntryArg(const char *key, const nsAStri
     printf("\n%s\n", NS_ConvertUTF16toUTF8(val).get());
 
   
-    const char* data = NS_ConvertUTF16toUTF8(val).get();
+    //~ const char* data = NS_ConvertUTF16toUTF8(val).get();
+    char* data = ToNewUTF8String(val);
     
     if(DEBUG || debug_mode) cout << "Setting dict SS " << key << ":" << data << endl;
 
