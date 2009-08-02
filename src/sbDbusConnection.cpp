@@ -123,11 +123,12 @@ NS_IMETHODIMP sbDbusConnection::Check()
 	dbus_connection_flush(conn);
 	dbus_message_unref(reply);
 	
+	
+	if(DEBUG || debug_mode) cout << "Done Handler call" << endl;
       }
 
       dbus_message_unref(msg);
       
-      if(DEBUG || debug_mode) cout << "Done Handler call" << endl;
     }
   
     return NS_OK;
