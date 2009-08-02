@@ -377,3 +377,10 @@ NS_IMETHODIMP sbDbusConnection::CloseStruct()
   
     return NS_OK;
 }
+
+
+/* void setDebugMode (in boolean debug_mode); */
+NS_IMETHODIMP sbDbusConnection::SetDebugMode(PRBool debug_mode)
+{
+    return NS_OK;
+}

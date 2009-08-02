@@ -491,6 +491,9 @@ sbMprisPlugin.prototype = {
       
       this.dbus.setInt32Arg(caps);
   },
+  
+  
+  
 };
 sbMprisPlugin.prototype.constructor = sbMprisPlugin;
 
