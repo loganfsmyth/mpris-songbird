@@ -46,7 +46,7 @@ Mpris.Controller = {
          this.debug_mode = this.prefs.getBoolPref("debug_mode");
 	 
 	 this.handler.debug_mode = this.debug_mode;
-	 this.handler.dbus.setDebugMode(this.debug_mode);
+	 this.handler.dbus.debug_mode = this.debug_mode;
          break;
      }
    },
