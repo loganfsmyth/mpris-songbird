@@ -40,11 +40,10 @@ NS_IMETHODIMP sbDbusConnection::GetDebug_mode(PRBool *aDebug_mode)
 }
 NS_IMETHODIMP sbDbusConnection::SetDebug_mode(PRBool aDebug_mode)
 {
-    
-    if(aDebug_mode) cout << "MPRIS: DEBUG MODE Set" << endl;
-    else cout << "MPRIS: DEBUG MODE unSet" << endl;
-    
     debug_mode = aDebug_mode;
+    
+    if(debug_mode) cout << "MPRIS: DEBUG MODE Set" << endl;
+    else cout << "MPRIS: DEBUG MODE Unset" << endl;
     return NS_OK;
 }
 
