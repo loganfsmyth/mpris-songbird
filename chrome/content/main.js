@@ -34,19 +34,12 @@ Mpris.Controller = {
     this.handler.init();
     this.handler.dbus.setDebugMode(this.debug_mode);
 
-    // initialization code
-    this._initialized = true;
-    
   },
   onUnLoad: function() {
     this.prefs.removeObserver("", this);
-    this._initialized = false;
   },
   
   observe: function(subject, topic, data) {
-    alert(subject);
-    alert(topic);
-    alert(data);
      if (topic != "nsPref:changed") return;
      switch(data) {
        case "debug_mode":

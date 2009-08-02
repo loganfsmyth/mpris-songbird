@@ -64,6 +64,6 @@ interface sbIDbusConnection : nsISupports
   void openStruct();
   void closeStruct();
   
-  void setDebugMode(in boolean debug_mode);
+  void setDebugMode(in boolean debug_status);
 
 };

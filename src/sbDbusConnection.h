@@ -44,6 +44,7 @@ protected:
   sbIMethodHandler *handler;
   std::deque<DBusMessageIter*> outgoing_args;
   DBusMessageIter incoming_args;
+  PRBool debug_mode;
   /* additional members */
 };
 
