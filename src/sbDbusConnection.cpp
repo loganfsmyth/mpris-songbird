@@ -353,7 +353,7 @@ NS_IMETHODIMP sbDbusConnection::SetDictSSEntryArg(const char *key, const nsAStri
     DBusMessageIter entry_obj;
     DBusMessageIter var_obj;
     
-    printf("%s\n", NS_ConvertUTF16toUTF8(val).get());
+    printf("\n%s\n", NS_ConvertUTF16toUTF8(val).get());
 
   
     const char* data = NS_ConvertUTF16toUTF8(val).get();
