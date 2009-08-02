@@ -337,7 +337,6 @@ NS_IMETHODIMP sbDbusConnection::SetStringArg(const char *data)
     if(DEBUG || debug_mode) cout << "Setting string " << data << endl;
     DBusMessageIter* args = outgoing_args.back();
     
-//    const char* data = NS_ConvertUTF16toUTF8(val).get();
     dbus_message_iter_append_basic(args, DBUS_TYPE_STRING, &data);
   
     if(DEBUG || debug_mode) cout << "Set string" << endl;
@@ -353,7 +352,6 @@ NS_IMETHODIMP sbDbusConnection::SetDictSSEntryArg(const char *key, const nsAStri
     DBusMessageIter entry_obj;
     DBusMessageIter var_obj;
     
-    //~ const char* data = NS_ConvertUTF16toUTF8(val).get();
     char* data = ToNewUTF8String(val);
     
     if(DEBUG || debug_mode) cout << "Setting dict SS " << key << ":" << data << endl;
