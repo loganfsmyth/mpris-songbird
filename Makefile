@@ -14,18 +14,8 @@ XUL_LIB=`pkg-config --cflags --libs libxul`
 DEFINES = -DXPCOM_GLUE_USE_NSPR -DXPCOM_GLUE
 OPTIONS = -fno-rtti -fno-exceptions -shared -Wall -Os -fPIC -Wl,-z,defs -include "xpcom-config.h" -fshort-wchar
 
-package32: build
-	sed '7s/MPRIS/MPRIS (32-bit)/' src/install.rdf | sed '5s/UUID/$(UUID32)/' | sed '8s/VERSION_NUMBER/$(VERSION)/' > install.rdf
-	zip -r Mpris-$(VERSION)-32bit.xpi components/ chrome/ platform/ defaults/ install.rdf chrome.manifest
-	
-package64: build
-	sed '7s/MPRIS/MPRIS (64-bit)/' src/install.rdf | sed '5s/UUID/$(UUID64)/' | sed '8s/VERSION_NUMBER/$(VERSION)/' > install.rdf
-	zip -r Mpris-$(VERSION)-64bit.xpi components/ chrome/ platform/ defaults/ install.rdf chrome.manifest
-
-
-build: idl src/sbDbusConnection.cpp src/sbDbusConnectionModule.cpp
-	g++ -o sbDbusConnection.so src/sbDbusConnection.cpp src/sbDbusConnectionModule.cpp $(OPTIONS) $(DEFINES) $(XUL_LIB) $(DBUS_INC_LIB)
-	mv -f sbDbusConnection.so components/
+package:
+	sed '8s/VERSION_NUMBER/$(VERSION)/' src/install.rdf > install.rdf
 	cp -f src/sbMprisPlugin.js components/
 	mkdir -p chrome/content
 	cp -f src/scripts-overlay.xul chrome/content/
@@ -34,6 +24,20 @@ build: idl src/sbDbusConnection.cpp src/sbDbusConnectionModule.cpp
 	cp -f src/icon.png chrome/content/
 	mkdir -p defaults/preferences
 	cp -f src/defaults.js defaults/preferences/
+	zip -r Mpris-$(VERSION).xpi components/ chrome/ platform/ defaults/ install.rdf chrome.manifest
+	
+build32: build
+	mkdir -p platform/Linux_x86-gcc3/components
+	mv -f sbDbusConnection.so platform/Linux_x86-gcc3/components
+
+build64: build
+	mkdir -p platform/Linux_x86_64-gcc3/components
+	mv -f sbDbusConnection.so platform/Linux_x86_64-gcc3/components
+
+
+build: idl src/sbDbusConnection.cpp src/sbDbusConnectionModule.cpp
+	g++ -o sbDbusConnection.so src/sbDbusConnection.cpp src/sbDbusConnectionModule.cpp $(OPTIONS) $(DEFINES) $(XUL_LIB) $(DBUS_INC_LIB)
+	
 	
 idl: src/sbIMpris.idl
 	$(XUL_SDK)/bin/xpidl -m header -I$(XUL_SDK)/idl src/sbIMpris.idl

@@ -2,7 +2,7 @@
 <RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:em="http://www.mozilla.org/2004/em-rdf#"
      xmlns:songbird="http://www.songbirdnest.com/2007/addon-metadata-rdf#">
   <Description about="urn:mozilla:install-manifest">
-    <em:id>UUID</em:id>
+    <em:id>{0a067f25-b5fa-4530-9396-fc7088a05415}</em:id>
     <em:type>2</em:type>
     <em:name>MPRIS</em:name>
     <em:version>VERSION_NUMBER</em:version>
