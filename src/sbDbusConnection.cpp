@@ -111,7 +111,14 @@ NS_IMETHODIMP sbDbusConnection::SetMatch(const char *match)
 NS_IMETHODIMP sbDbusConnection::Check()
 {
     if(conn == NULL) return NS_OK;
-  
+ 
+    //~ int i;
+    //~ for(i = 0; i < 30; i++){
+	//~ cout << NS_ConvertUTF16toUTF8("Flamboyant").get() << endl;
+    //~ }
+
+
+    
     DBusMessage* msg;
     DBusMessage* reply;
     DBusMessageIter *reply_iter;
@@ -345,6 +352,9 @@ NS_IMETHODIMP sbDbusConnection::SetDictSSEntryArg(const char *key, const nsAStri
     DBusMessageIter* array_obj = outgoing_args.back();
     DBusMessageIter entry_obj;
     DBusMessageIter var_obj;
+    
+    printf("%s\n", NS_ConvertUTF16toUTF8(val).get());
+
   
     const char* data = NS_ConvertUTF16toUTF8(val).get();
     
