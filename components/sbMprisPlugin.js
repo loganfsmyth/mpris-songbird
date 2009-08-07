@@ -30,7 +30,7 @@ function sbMprisPlugin() {
   
   
   
-  var xml_header = "<!DOCTYPE node PUBLIC \"-//freedesktop//DTD D-BUS Object Introspection 1.0//EN\" \"http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd\"><node name=\"/org/mpris/testing\"><interface name=\"org.mpris.testing\">";
+  var xml_header = "<!DOCTYPE node PUBLIC \"-//freedesktop//DTD D-BUS Object Introspection 1.0//EN\" \"http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd\"><node name=\"/org/mpris/songbird\"><interface name=\"org.mpris.songbird\">";
   var xml_footer = "</interface></node>";
   this.introspect_root = xml_header +"	\
 	<method name=\"Identity\">	\
