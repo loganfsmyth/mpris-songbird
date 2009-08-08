@@ -142,7 +142,7 @@ NS_IMETHODIMP sbDbusConnection::Check()
 	
 	if(DEBUG || debug_mode){
 	    cout << "Interface: " << dbus_message_get_interface(msg) << endl;
-	    cout << "Path: " << dbus_message_get_path(msg)(msg) << endl;
+	    cout << "Path: " << dbus_message_get_path(msg) << endl;
 	    cout << "Member: " << dbus_message_get_member(msg) << endl;
 	}
 	
