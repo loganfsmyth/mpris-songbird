@@ -140,8 +140,11 @@ NS_IMETHODIMP sbDbusConnection::Check()
 	
 	outgoing_args.push_back(reply_iter);
 	
-	if(DEBUG || debug_mode) cout << "Before Handler Call " << endl;
-	
+	if(DEBUG || debug_mode){
+	    cout << "Interface: " << dbus_message_get_interface(msg) << endl;
+	    cout << "Path: " << dbus_message_get_path(msg)(msg) << endl;
+	    cout << "Member: " << dbus_message_get_member(msg) << endl;
+	}
 	
 	handler->HandleMethod(dbus_message_get_interface(msg), dbus_message_get_path(msg), dbus_message_get_member(msg)); 
 	
