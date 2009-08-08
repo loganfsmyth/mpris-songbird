@@ -224,6 +224,7 @@ sbMprisPlugin.prototype = {
 	  }
 	}
 	break;
+      case "":
       case "org.freedesktop.MediaPlayer":
 	switch(path){
 	  case "/":
