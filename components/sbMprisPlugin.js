@@ -9,7 +9,8 @@
  */
 
 
-Components.utils.import("resource://gre/modules/XPCOMUtils.jsm"); 
+Components.utils.import("resource://gre/modules/XPCOMUtils.jsm");
+Components.utils.import("resource://app/jsmodules/sbProperties.jsm");  
 
 const CLASS_ID = Components.ID("{03638fa0-5327-11de-8a39-0800200c9a66}");
 const CLASS_NAME = "sbMprisPlugin";
@@ -55,6 +56,10 @@ function sbMprisPlugin() {
 	</method>					\
 	<method name=\"GetMetadata\">			\
 	  <arg type=\"a{sv}\" direction=\"out\" />	\
+	</method>				\
+	<method name=\"SetMetadata\">			\
+	  <arg type=\"s\" direction=\"in\" />	\
+	  <arg type=\"s\" direction=\"in\" />	\
 	</method>					\
 	<method name=\"GetCaps\">			\
 	  <arg type=\"i\" direction=\"out\" />	\
@@ -88,6 +93,11 @@ function sbMprisPlugin() {
 	<method name=\"GetMetadata\">			\
 	  <arg type=\"i\" direction=\"in\" />		\
 	  <arg type=\"a{sv}\" direction=\"out\" />	\
+	</method>			\
+	<method name=\"SetMetadata\">			\
+	  <arg type=\"i\" direction=\"in\" />		\
+	  <arg type=\"s\" direction=\"in\" />	\
+	  <arg type=\"s\" direction=\"in\" />	\
 	</method>					\
 	<method name=\"GetCurrentTrack\">		\
 	  <arg type=\"i\" direction=\"out\" />	\
@@ -228,6 +238,7 @@ sbMprisPlugin.prototype = {
       case "":
       case "org.freedesktop.MediaPlayer":
 	switch(path){
+	  case "/org/mpris/songbird/":
 	  case "/":
 	    switch(member){
 	      case "Identity":
@@ -246,6 +257,7 @@ sbMprisPlugin.prototype = {
 		break;
 	    }
 	    break;
+	  case "/org/mpris/songbird/Player":
 	  case "/Player":
 	    switch(member){
 	      case "Next":
@@ -282,6 +294,14 @@ sbMprisPlugin.prototype = {
 	      case "GetMetadata":
 		this.getMetadata(this.seq.viewPosition);
 		break;
+		
+	      // Nonstandard method for setting metadata
+	      // Proposed by Panflute project
+	      case "SetMetadata":
+		this.setMetadata(this.seq.viewPosition);
+		break;
+	      // End nonstandard
+		
 	      case "GetCaps":
 		this.getCaps();
 		break;
@@ -300,6 +320,7 @@ sbMprisPlugin.prototype = {
 		break;
 	    }
 	    break;
+	  case "/org/mpris/songbird/TrackList":
 	  case "/TrackList":
 	    switch(member){
 	      case "GetLength":
@@ -314,6 +335,15 @@ sbMprisPlugin.prototype = {
 	      case "GetMetadata":
 		this.getMetadata(this.dbus.getInt32Arg());
 		break;
+		
+		
+	      // Nonstandard method for setting metadata
+	      // Proposed by Panflute project
+	      case "SetMetadata":
+		this.setMetadata(this.dbus.getInt32Arg());
+		break;
+	      // End nonstandard
+		
 	      case "AddTrack":
 		this.addTrack(this.dbus.getStringArg(), this.dbus.getBoolArg());
 		break;
@@ -339,6 +369,22 @@ sbMprisPlugin.prototype = {
     }
   },
   
+  setMetadata: function(track_num) {
+    var key = this.dbus.getStringArg();
+    var value = this.dbus.getStringArg();
+    dump(key +": " + value + "\n\n");
+    
+    var track_info = this.seq.view.getItemByIndex(track_num);
+    
+    switch (key) {
+      case 'rating':
+	track_info.setProperty(SBProperties.rating, value);
+	break;
+      
+    }
+    
+  },
+  
   getMetadata: function(track_num) {
     if(this.seq.view == null || track_num >= this.seq.view.length){
       this.dbus.openDictEntryArray();
@@ -346,66 +392,64 @@ sbMprisPlugin.prototype = {
       return;
     }
     
-    var prefix = 'http://songbirdnest.com/data/1.0#';
     var track_info = this.seq.view.getItemByIndex(track_num);
     var str;
     
-    //~ dump(track_info.getProperties());
-    
     this.dbus.openDictEntryArray();
-    if(typeof track_info.getProperty(prefix+'contentURL') == 'string'){
-      str = decodeURI(track_info.getProperty(prefix+'contentURL'));
-      //~ dump(str);
+    
+    if(typeof track_info.getProperty(SBProperties.contentURL) == 'string'){
+      str = track_info.getProperty(SBProperties.contentURL);
+      dump(str);
       this.dbus.setDictSSEntryArg("location", str);
     }
-    if(typeof track_info.getProperty(prefix+'trackName') == 'string'){
-      str = track_info.getProperty(prefix+'trackName');
-      //~ dump(str);
+    if(typeof track_info.getProperty(SBProperties.trackName) == 'string'){
+      str = track_info.getProperty(SBProperties.trackName);
+      dump(str);
       this.dbus.setDictSSEntryArg("title", str);
     }
-    if(typeof track_info.getProperty(prefix+'artistName') == 'string'){
-      str = track_info.getProperty(prefix+'artistName');
-      //~ dump(str);
+    if(typeof track_info.getProperty(SBProperties.artistName) == 'string'){
+      str = track_info.getProperty(SBProperties.artistName);
+      dump(str);
       this.dbus.setDictSSEntryArg("artist", str);
     }
-    if(typeof track_info.getProperty(prefix+'albumName') == 'string'){
-      str = track_info.getProperty(prefix+'albumName');
-      //~ dump(str);
+    if(typeof track_info.getProperty(SBProperties.albumName) == 'string'){
+      str = track_info.getProperty(SBProperties.albumName);
+      dump(str);
       this.dbus.setDictSSEntryArg("album", str);
     }
-    if(typeof track_info.getProperty(prefix+'trackNumber') == 'string'){
-      str = track_info.getProperty(prefix+'trackNumber');
-      //~ dump(str);
+    if(typeof track_info.getProperty(SBProperties.trackNumber) == 'string'){
+      str = track_info.getProperty(SBProperties.trackNumber);
+      dump(str);
       this.dbus.setDictSSEntryArg("tracknumber", str);    
     }
     
-    if(typeof track_info.getProperty(prefix+'duration') == 'string'){
-      this.dbus.setDictSIEntryArg("time", parseInt(track_info.getProperty(prefix+'duration'))/1000000);
-      this.dbus.setDictSIEntryArg("mtime", parseInt(track_info.getProperty(prefix+'duration'))/1000);
+    if(typeof track_info.getProperty(SBProperties.duration) == 'string'){
+      this.dbus.setDictSIEntryArg("time", parseInt(track_info.getProperty(SBProperties.duration))/1000000);
+      this.dbus.setDictSIEntryArg("mtime", parseInt(track_info.getProperty(SBProperties.duration))/1000);
     }
     
-    if(typeof track_info.getProperty(prefix+'genre') == 'string'){
-      str = track_info.getProperty(prefix+'genre');
-      //~ dump(str);
+    if(typeof track_info.getProperty(SBProperties.genre) == 'string'){
+      str = track_info.getProperty(SBProperties.genre);
+      dump(str);
       this.dbus.setDictSSEntryArg("genre", str);
     }
-    if(typeof track_info.getProperty(prefix+'comment') == 'string'){
-      str = track_info.getProperty(prefix+'comment');
-      //~ dump(str);
+    if(typeof track_info.getProperty(SBProperties.comment) == 'string'){
+      str = track_info.getProperty(SBProperties.comment);
+      dump(str);
       this.dbus.setDictSSEntryArg("comment", str);
     }
     
-    if(typeof track_info.getProperty(prefix+'year') == 'string'){
+    if(typeof track_info.getProperty(SBProperties.year) == 'string'){
     
-      this.dbus.setDictSIEntryArg("year", parseInt(track_info.getProperty(prefix+'year')));
+      this.dbus.setDictSIEntryArg("year", parseInt(track_info.getProperty(SBProperties.year)));
     
       var date = new Date();
-      date.setFullYear(parseInt(track_info.getProperty(prefix+'year')));
+      date.setFullYear(parseInt(track_info.getProperty(SBProperties.year)));
       this.dbus.setDictSIEntryArg("date", date.getTime());
     }
     
-    if(typeof track_info.getProperty(prefix+'primaryImageURL') == 'string'){
-      this.dbus.setDictSSEntryArg("arturl", decodeURI(track_info.getProperty(prefix+'primaryImageURL')));
+    if(typeof track_info.getProperty(SBProperties.primaryImageURL) == 'string'){
+      this.dbus.setDictSSEntryArg("arturl", track_info.getProperty(SBProperties.primaryImageURL));
     }
     
     //TODO
@@ -420,12 +464,18 @@ sbMprisPlugin.prototype = {
     //~ this.dbus.setDictSSEntryArg("mb_album_artist_id", "");
     //~ this.dbus.setDictSSEntryArg("mb_album_artist_sort_name", "");
     
-    if(typeof track_info.getProperty(prefix+'bitRate') == 'string'){
-      this.dbus.setDictSIEntryArg("audio_bitrate", parseInt(track_info.getProperty(prefix+'bitRate')));
+    if(typeof track_info.getProperty(SBProperties.bitRate) == 'string'){
+      this.dbus.setDictSIEntryArg("audio_bitrate", parseInt(track_info.getProperty(SBProperties.bitRate)));
     }
-    if(typeof track_info.getProperty(prefix+'sampleRate') == 'string'){
-      this.dbus.setDictSIEntryArg("audio_samplerate", parseInt(track_info.getProperty(prefix+'sampleRate')));
+    if(typeof track_info.getProperty(SBProperties.sampleRate) == 'string'){
+      this.dbus.setDictSIEntryArg("audio_samplerate", parseInt(track_info.getProperty(SBProperties.sampleRate)));
     }
+    
+    
+    if(typeof track_info.getProperty(SBProperties.rating) == 'string'){
+      this.dbus.setDictSIEntryArg("rating", parseInt(track_info.getProperty(SBProperties.rating)));
+    }
+    
     
     this.dbus.closeDictEntryArray();
   },

@@ -113,8 +113,11 @@ class NS_NO_VTABLE NS_SCRIPTABLE sbIMprisPlugin : public sbIMethodHandler {
   /* void init (in boolean debug); */
   NS_SCRIPTABLE NS_IMETHOD Init(PRBool debug) = 0;
 
-  /* void getMetadata (); */
-  NS_SCRIPTABLE NS_IMETHOD GetMetadata(void) = 0;
+  /* void getMetadata (in long track_num); */
+  NS_SCRIPTABLE NS_IMETHOD GetMetadata(PRInt32 track_num) = 0;
+
+  /* void setMetadata (in long track_num); */
+  NS_SCRIPTABLE NS_IMETHOD SetMetadata(PRInt32 track_num) = 0;
 
   /* void getStatus (); */
   NS_SCRIPTABLE NS_IMETHOD GetStatus(void) = 0;
@@ -139,7 +142,8 @@ class NS_NO_VTABLE NS_SCRIPTABLE sbIMprisPlugin : public sbIMethodHandler {
   NS_SCRIPTABLE NS_IMETHOD GetDebug_mode(PRBool *aDebug_mode); \
   NS_SCRIPTABLE NS_IMETHOD SetDebug_mode(PRBool aDebug_mode); \
   NS_SCRIPTABLE NS_IMETHOD Init(PRBool debug); \
-  NS_SCRIPTABLE NS_IMETHOD GetMetadata(void); \
+  NS_SCRIPTABLE NS_IMETHOD GetMetadata(PRInt32 track_num); \
+  NS_SCRIPTABLE NS_IMETHOD SetMetadata(PRInt32 track_num); \
   NS_SCRIPTABLE NS_IMETHOD GetStatus(void); \
   NS_SCRIPTABLE NS_IMETHOD GetCaps(void); \
   NS_SCRIPTABLE NS_IMETHOD AddTrack(const nsAString & uri, PRBool play_now); \
@@ -152,7 +156,8 @@ class NS_NO_VTABLE NS_SCRIPTABLE sbIMprisPlugin : public sbIMethodHandler {
   NS_SCRIPTABLE NS_IMETHOD GetDebug_mode(PRBool *aDebug_mode) { return _to GetDebug_mode(aDebug_mode); } \
   NS_SCRIPTABLE NS_IMETHOD SetDebug_mode(PRBool aDebug_mode) { return _to SetDebug_mode(aDebug_mode); } \
   NS_SCRIPTABLE NS_IMETHOD Init(PRBool debug) { return _to Init(debug); } \
-  NS_SCRIPTABLE NS_IMETHOD GetMetadata(void) { return _to GetMetadata(); } \
+  NS_SCRIPTABLE NS_IMETHOD GetMetadata(PRInt32 track_num) { return _to GetMetadata(track_num); } \
+  NS_SCRIPTABLE NS_IMETHOD SetMetadata(PRInt32 track_num) { return _to SetMetadata(track_num); } \
   NS_SCRIPTABLE NS_IMETHOD GetStatus(void) { return _to GetStatus(); } \
   NS_SCRIPTABLE NS_IMETHOD GetCaps(void) { return _to GetCaps(); } \
   NS_SCRIPTABLE NS_IMETHOD AddTrack(const nsAString & uri, PRBool play_now) { return _to AddTrack(uri, play_now); } \
@@ -165,7 +170,8 @@ class NS_NO_VTABLE NS_SCRIPTABLE sbIMprisPlugin : public sbIMethodHandler {
   NS_SCRIPTABLE NS_IMETHOD GetDebug_mode(PRBool *aDebug_mode) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetDebug_mode(aDebug_mode); } \
   NS_SCRIPTABLE NS_IMETHOD SetDebug_mode(PRBool aDebug_mode) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetDebug_mode(aDebug_mode); } \
   NS_SCRIPTABLE NS_IMETHOD Init(PRBool debug) { return !_to ? NS_ERROR_NULL_POINTER : _to->Init(debug); } \
-  NS_SCRIPTABLE NS_IMETHOD GetMetadata(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetMetadata(); } \
+  NS_SCRIPTABLE NS_IMETHOD GetMetadata(PRInt32 track_num) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetMetadata(track_num); } \
+  NS_SCRIPTABLE NS_IMETHOD SetMetadata(PRInt32 track_num) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetMetadata(track_num); } \
   NS_SCRIPTABLE NS_IMETHOD GetStatus(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetStatus(); } \
   NS_SCRIPTABLE NS_IMETHOD GetCaps(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetCaps(); } \
   NS_SCRIPTABLE NS_IMETHOD AddTrack(const nsAString & uri, PRBool play_now) { return !_to ? NS_ERROR_NULL_POINTER : _to->AddTrack(uri, play_now); } \
@@ -229,8 +235,14 @@ NS_IMETHODIMP sbMprisPlugin::Init(PRBool debug)
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
-/* void getMetadata (); */
-NS_IMETHODIMP sbMprisPlugin::GetMetadata()
+/* void getMetadata (in long track_num); */
+NS_IMETHODIMP sbMprisPlugin::GetMetadata(PRInt32 track_num)
+{
+    return NS_ERROR_NOT_IMPLEMENTED;
+}
+
+/* void setMetadata (in long track_num); */
+NS_IMETHODIMP sbMprisPlugin::SetMetadata(PRInt32 track_num)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }

@@ -26,7 +26,8 @@ interface sbIMprisPlugin : sbIMethodHandler
   attribute sbIDbusConnection dbus;
   attribute boolean debug_mode;
   void init(in boolean debug);
-  void getMetadata();
+  void getMetadata(in long track_num);
+  void setMetadata(in long track_num);
   void getStatus();
   void getCaps();
   void addTrack(in AString uri, in boolean play_now);

@@ -1,7 +1,4 @@
-VERSION=0.1.7
-
-UUID32={0a067f25-b5fa-4530-9396-fc7088a05415}
-UUID64={1332dba8-bade-4111-b097-f09f10f03ef2}
+VERSION=0.1.9
 
 # DBus headers/libs
 DBUS_INC_LIB=`pkg-config --cflags --libs dbus-1`
