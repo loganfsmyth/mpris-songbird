@@ -1,4 +1,4 @@
-VERSION=0.1.9
+VERSION=0.1.10
 
 # DBus headers/libs
 DBUS_INC_LIB=`pkg-config --cflags --libs dbus-1`
