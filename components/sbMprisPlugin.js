@@ -372,7 +372,6 @@ sbMprisPlugin.prototype = {
   setMetadata: function(track_num) {
     var key = this.dbus.getStringArg();
     var value = this.dbus.getStringArg();
-    dump(key +": " + value + "\n\n");
     
     var track_info = this.seq.view.getItemByIndex(track_num);
     
@@ -399,27 +398,22 @@ sbMprisPlugin.prototype = {
     
     if(typeof track_info.getProperty(SBProperties.contentURL) == 'string'){
       str = track_info.getProperty(SBProperties.contentURL);
-      dump(str);
       this.dbus.setDictSSEntryArg("location", str);
     }
     if(typeof track_info.getProperty(SBProperties.trackName) == 'string'){
       str = track_info.getProperty(SBProperties.trackName);
-      dump(str);
       this.dbus.setDictSSEntryArg("title", str);
     }
     if(typeof track_info.getProperty(SBProperties.artistName) == 'string'){
       str = track_info.getProperty(SBProperties.artistName);
-      dump(str);
       this.dbus.setDictSSEntryArg("artist", str);
     }
     if(typeof track_info.getProperty(SBProperties.albumName) == 'string'){
       str = track_info.getProperty(SBProperties.albumName);
-      dump(str);
       this.dbus.setDictSSEntryArg("album", str);
     }
     if(typeof track_info.getProperty(SBProperties.trackNumber) == 'string'){
       str = track_info.getProperty(SBProperties.trackNumber);
-      dump(str);
       this.dbus.setDictSSEntryArg("tracknumber", str);    
     }
     
@@ -430,12 +424,10 @@ sbMprisPlugin.prototype = {
     
     if(typeof track_info.getProperty(SBProperties.genre) == 'string'){
       str = track_info.getProperty(SBProperties.genre);
-      dump(str);
       this.dbus.setDictSSEntryArg("genre", str);
     }
     if(typeof track_info.getProperty(SBProperties.comment) == 'string'){
       str = track_info.getProperty(SBProperties.comment);
-      dump(str);
       this.dbus.setDictSSEntryArg("comment", str);
     }
     
