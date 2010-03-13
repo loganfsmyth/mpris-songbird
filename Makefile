@@ -7,6 +7,8 @@ DBUS_INC_LIB=`pkg-config --cflags --libs dbus-1`
 XUL_SDK = `pkg-config --variable=sdkdir libxul`
 XUL_LIB=`pkg-config --cflags --libs libxul`
 
+SYSTEM_ARCH = `uname -m`
+
 # Random stuff needed by Mozilla 
 DEFINES = -DXPCOM_GLUE_USE_NSPR -DXPCOM_GLUE
 OPTIONS = -fno-rtti -fno-exceptions -shared -Wall -Os -fPIC -Wl,-z,defs -include "xpcom-config.h" -fshort-wchar
@@ -14,12 +16,9 @@ OPTIONS = -fno-rtti -fno-exceptions -shared -Wall -Os -fPIC -Wl,-z,defs -include
 COMPONENT_FILES = src/components/sbDbusConnection.cpp src/components/sbDbusConnectionModule.cpp
 GCC_ARGS = $(COMPONENT_FILES) $(OPTIONS) $(DEFINES) $(XUL_LIB) $(DBUS_INC_LIB)
 
-build64: idl $(COMPONENT_FILES)
-	g++ -o src/platform/Linux_x86_64-gcc3/components/sbDbusConnection.so $(GCC_ARGS)
+build: idl $(COMPONENT_FILES)
+	g++ -o src/platform/Linux_$(SYSTEM_ARCH)-gcc3/components/sbDbusConnection.so $(GCC_ARGS)
 
-build32: idl $(COMPONENT_FILES)
-	g++ -o src/platform/Linux_x86-gcc3/components/sbDbusConnection.so $(GCC_ARGS)
-		
 idl: src/components/sbIMpris.idl
 	cd src/components && $(XUL_SDK)/bin/xpidl -m header -I$(XUL_SDK)/idl sbIMpris.idl && $(XUL_SDK)/bin/xpidl -m typelib -w -v -I$(XUL_SDK)/idl sbIMpris.idl
 
