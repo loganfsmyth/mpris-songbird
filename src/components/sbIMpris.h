@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM src/sbIMpris.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM sbIMpris.idl
  */
 
 #ifndef __gen_sbIMpris_h__
@@ -292,7 +292,7 @@ class NS_NO_VTABLE NS_SCRIPTABLE sbIDbusConnection : public nsISupports {
   NS_SCRIPTABLE NS_IMETHOD SetDebug_mode(PRBool aDebug_mode) = 0;
 
   /* long init (in string name, in boolean debug); */
-  NS_SCRIPTABLE NS_IMETHOD Init(const char *name, PRBool debug, PRInt32 *_retval) = 0;
+  NS_SCRIPTABLE NS_IMETHOD Init(const char *name, PRBool debug, PRInt32 *_retval NS_OUTPARAM) = 0;
 
   /* void setMatch (in string match); */
   NS_SCRIPTABLE NS_IMETHOD SetMatch(const char *match) = 0;
@@ -301,7 +301,7 @@ class NS_NO_VTABLE NS_SCRIPTABLE sbIDbusConnection : public nsISupports {
   NS_SCRIPTABLE NS_IMETHOD Check(void) = 0;
 
   /* long end (); */
-  NS_SCRIPTABLE NS_IMETHOD End(PRInt32 *_retval) = 0;
+  NS_SCRIPTABLE NS_IMETHOD End(PRInt32 *_retval NS_OUTPARAM) = 0;
 
   /* void prepareSignal (in string path, in string inter, in string name); */
   NS_SCRIPTABLE NS_IMETHOD PrepareSignal(const char *path, const char *inter, const char *name) = 0;
@@ -313,13 +313,13 @@ class NS_NO_VTABLE NS_SCRIPTABLE sbIDbusConnection : public nsISupports {
   NS_SCRIPTABLE NS_IMETHOD SetMethodHandler(sbIMethodHandler *handler) = 0;
 
   /* long getInt32Arg (); */
-  NS_SCRIPTABLE NS_IMETHOD GetInt32Arg(PRInt32 *_retval) = 0;
+  NS_SCRIPTABLE NS_IMETHOD GetInt32Arg(PRInt32 *_retval NS_OUTPARAM) = 0;
 
   /* boolean getBoolArg (); */
-  NS_SCRIPTABLE NS_IMETHOD GetBoolArg(PRBool *_retval) = 0;
+  NS_SCRIPTABLE NS_IMETHOD GetBoolArg(PRBool *_retval NS_OUTPARAM) = 0;
 
   /* string getStringArg (); */
-  NS_SCRIPTABLE NS_IMETHOD GetStringArg(char **_retval) = 0;
+  NS_SCRIPTABLE NS_IMETHOD GetStringArg(char **_retval NS_OUTPARAM) = 0;
 
   /* void setUInt32Arg (in unsigned long val); */
   NS_SCRIPTABLE NS_IMETHOD SetUInt32Arg(PRUint32 val) = 0;
@@ -359,16 +359,16 @@ class NS_NO_VTABLE NS_SCRIPTABLE sbIDbusConnection : public nsISupports {
 #define NS_DECL_SBIDBUSCONNECTION \
   NS_SCRIPTABLE NS_IMETHOD GetDebug_mode(PRBool *aDebug_mode); \
   NS_SCRIPTABLE NS_IMETHOD SetDebug_mode(PRBool aDebug_mode); \
-  NS_SCRIPTABLE NS_IMETHOD Init(const char *name, PRBool debug, PRInt32 *_retval); \
+  NS_SCRIPTABLE NS_IMETHOD Init(const char *name, PRBool debug, PRInt32 *_retval NS_OUTPARAM); \
   NS_SCRIPTABLE NS_IMETHOD SetMatch(const char *match); \
   NS_SCRIPTABLE NS_IMETHOD Check(void); \
-  NS_SCRIPTABLE NS_IMETHOD End(PRInt32 *_retval); \
+  NS_SCRIPTABLE NS_IMETHOD End(PRInt32 *_retval NS_OUTPARAM); \
   NS_SCRIPTABLE NS_IMETHOD PrepareSignal(const char *path, const char *inter, const char *name); \
   NS_SCRIPTABLE NS_IMETHOD SendSignal(void); \
   NS_SCRIPTABLE NS_IMETHOD SetMethodHandler(sbIMethodHandler *handler); \
-  NS_SCRIPTABLE NS_IMETHOD GetInt32Arg(PRInt32 *_retval); \
-  NS_SCRIPTABLE NS_IMETHOD GetBoolArg(PRBool *_retval); \
-  NS_SCRIPTABLE NS_IMETHOD GetStringArg(char **_retval); \
+  NS_SCRIPTABLE NS_IMETHOD GetInt32Arg(PRInt32 *_retval NS_OUTPARAM); \
+  NS_SCRIPTABLE NS_IMETHOD GetBoolArg(PRBool *_retval NS_OUTPARAM); \
+  NS_SCRIPTABLE NS_IMETHOD GetStringArg(char **_retval NS_OUTPARAM); \
   NS_SCRIPTABLE NS_IMETHOD SetUInt32Arg(PRUint32 val); \
   NS_SCRIPTABLE NS_IMETHOD SetInt32Arg(PRInt32 val); \
   NS_SCRIPTABLE NS_IMETHOD SetUInt16Arg(PRUint16 val); \
@@ -384,16 +384,16 @@ class NS_NO_VTABLE NS_SCRIPTABLE sbIDbusConnection : public nsISupports {
 #define NS_FORWARD_SBIDBUSCONNECTION(_to) \
   NS_SCRIPTABLE NS_IMETHOD GetDebug_mode(PRBool *aDebug_mode) { return _to GetDebug_mode(aDebug_mode); } \
   NS_SCRIPTABLE NS_IMETHOD SetDebug_mode(PRBool aDebug_mode) { return _to SetDebug_mode(aDebug_mode); } \
-  NS_SCRIPTABLE NS_IMETHOD Init(const char *name, PRBool debug, PRInt32 *_retval) { return _to Init(name, debug, _retval); } \
+  NS_SCRIPTABLE NS_IMETHOD Init(const char *name, PRBool debug, PRInt32 *_retval NS_OUTPARAM) { return _to Init(name, debug, _retval); } \
   NS_SCRIPTABLE NS_IMETHOD SetMatch(const char *match) { return _to SetMatch(match); } \
   NS_SCRIPTABLE NS_IMETHOD Check(void) { return _to Check(); } \
-  NS_SCRIPTABLE NS_IMETHOD End(PRInt32 *_retval) { return _to End(_retval); } \
+  NS_SCRIPTABLE NS_IMETHOD End(PRInt32 *_retval NS_OUTPARAM) { return _to End(_retval); } \
   NS_SCRIPTABLE NS_IMETHOD PrepareSignal(const char *path, const char *inter, const char *name) { return _to PrepareSignal(path, inter, name); } \
   NS_SCRIPTABLE NS_IMETHOD SendSignal(void) { return _to SendSignal(); } \
   NS_SCRIPTABLE NS_IMETHOD SetMethodHandler(sbIMethodHandler *handler) { return _to SetMethodHandler(handler); } \
-  NS_SCRIPTABLE NS_IMETHOD GetInt32Arg(PRInt32 *_retval) { return _to GetInt32Arg(_retval); } \
-  NS_SCRIPTABLE NS_IMETHOD GetBoolArg(PRBool *_retval) { return _to GetBoolArg(_retval); } \
-  NS_SCRIPTABLE NS_IMETHOD GetStringArg(char **_retval) { return _to GetStringArg(_retval); } \
+  NS_SCRIPTABLE NS_IMETHOD GetInt32Arg(PRInt32 *_retval NS_OUTPARAM) { return _to GetInt32Arg(_retval); } \
+  NS_SCRIPTABLE NS_IMETHOD GetBoolArg(PRBool *_retval NS_OUTPARAM) { return _to GetBoolArg(_retval); } \
+  NS_SCRIPTABLE NS_IMETHOD GetStringArg(char **_retval NS_OUTPARAM) { return _to GetStringArg(_retval); } \
   NS_SCRIPTABLE NS_IMETHOD SetUInt32Arg(PRUint32 val) { return _to SetUInt32Arg(val); } \
   NS_SCRIPTABLE NS_IMETHOD SetInt32Arg(PRInt32 val) { return _to SetInt32Arg(val); } \
   NS_SCRIPTABLE NS_IMETHOD SetUInt16Arg(PRUint16 val) { return _to SetUInt16Arg(val); } \
@@ -409,16 +409,16 @@ class NS_NO_VTABLE NS_SCRIPTABLE sbIDbusConnection : public nsISupports {
 #define NS_FORWARD_SAFE_SBIDBUSCONNECTION(_to) \
   NS_SCRIPTABLE NS_IMETHOD GetDebug_mode(PRBool *aDebug_mode) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetDebug_mode(aDebug_mode); } \
   NS_SCRIPTABLE NS_IMETHOD SetDebug_mode(PRBool aDebug_mode) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetDebug_mode(aDebug_mode); } \
-  NS_SCRIPTABLE NS_IMETHOD Init(const char *name, PRBool debug, PRInt32 *_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->Init(name, debug, _retval); } \
+  NS_SCRIPTABLE NS_IMETHOD Init(const char *name, PRBool debug, PRInt32 *_retval NS_OUTPARAM) { return !_to ? NS_ERROR_NULL_POINTER : _to->Init(name, debug, _retval); } \
   NS_SCRIPTABLE NS_IMETHOD SetMatch(const char *match) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetMatch(match); } \
   NS_SCRIPTABLE NS_IMETHOD Check(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->Check(); } \
-  NS_SCRIPTABLE NS_IMETHOD End(PRInt32 *_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->End(_retval); } \
+  NS_SCRIPTABLE NS_IMETHOD End(PRInt32 *_retval NS_OUTPARAM) { return !_to ? NS_ERROR_NULL_POINTER : _to->End(_retval); } \
   NS_SCRIPTABLE NS_IMETHOD PrepareSignal(const char *path, const char *inter, const char *name) { return !_to ? NS_ERROR_NULL_POINTER : _to->PrepareSignal(path, inter, name); } \
   NS_SCRIPTABLE NS_IMETHOD SendSignal(void) { return !_to ? NS_ERROR_NULL_POINTER : _to->SendSignal(); } \
   NS_SCRIPTABLE NS_IMETHOD SetMethodHandler(sbIMethodHandler *handler) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetMethodHandler(handler); } \
-  NS_SCRIPTABLE NS_IMETHOD GetInt32Arg(PRInt32 *_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInt32Arg(_retval); } \
-  NS_SCRIPTABLE NS_IMETHOD GetBoolArg(PRBool *_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetBoolArg(_retval); } \
-  NS_SCRIPTABLE NS_IMETHOD GetStringArg(char **_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetStringArg(_retval); } \
+  NS_SCRIPTABLE NS_IMETHOD GetInt32Arg(PRInt32 *_retval NS_OUTPARAM) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetInt32Arg(_retval); } \
+  NS_SCRIPTABLE NS_IMETHOD GetBoolArg(PRBool *_retval NS_OUTPARAM) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetBoolArg(_retval); } \
+  NS_SCRIPTABLE NS_IMETHOD GetStringArg(char **_retval NS_OUTPARAM) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetStringArg(_retval); } \
   NS_SCRIPTABLE NS_IMETHOD SetUInt32Arg(PRUint32 val) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetUInt32Arg(val); } \
   NS_SCRIPTABLE NS_IMETHOD SetInt32Arg(PRInt32 val) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetInt32Arg(val); } \
   NS_SCRIPTABLE NS_IMETHOD SetUInt16Arg(PRUint16 val) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetUInt16Arg(val); } \
@@ -473,7 +473,7 @@ NS_IMETHODIMP sbDbusConnection::SetDebug_mode(PRBool aDebug_mode)
 }
 
 /* long init (in string name, in boolean debug); */
-NS_IMETHODIMP sbDbusConnection::Init(const char *name, PRBool debug, PRInt32 *_retval)
+NS_IMETHODIMP sbDbusConnection::Init(const char *name, PRBool debug, PRInt32 *_retval NS_OUTPARAM)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
@@ -491,7 +491,7 @@ NS_IMETHODIMP sbDbusConnection::Check()
 }
 
 /* long end (); */
-NS_IMETHODIMP sbDbusConnection::End(PRInt32 *_retval)
+NS_IMETHODIMP sbDbusConnection::End(PRInt32 *_retval NS_OUTPARAM)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
@@ -515,19 +515,19 @@ NS_IMETHODIMP sbDbusConnection::SetMethodHandler(sbIMethodHandler *handler)
 }
 
 /* long getInt32Arg (); */
-NS_IMETHODIMP sbDbusConnection::GetInt32Arg(PRInt32 *_retval)
+NS_IMETHODIMP sbDbusConnection::GetInt32Arg(PRInt32 *_retval NS_OUTPARAM)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
 /* boolean getBoolArg (); */
-NS_IMETHODIMP sbDbusConnection::GetBoolArg(PRBool *_retval)
+NS_IMETHODIMP sbDbusConnection::GetBoolArg(PRBool *_retval NS_OUTPARAM)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
 /* string getStringArg (); */
-NS_IMETHODIMP sbDbusConnection::GetStringArg(char **_retval)
+NS_IMETHODIMP sbDbusConnection::GetStringArg(char **_retval NS_OUTPARAM)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
