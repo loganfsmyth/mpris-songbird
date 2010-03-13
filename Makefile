@@ -28,7 +28,6 @@ package:
 
 clean: 
 	rm src/components/sbIMpris.h
-	rm src/components/sbIMpris.xpt
 
 deps: 
 	aptitude install build-essential xulrunner-dev libdbus-1-dev
