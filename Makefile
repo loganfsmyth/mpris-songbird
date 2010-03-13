@@ -1,4 +1,4 @@
-VERSION=0.1.10
+VERSION=0.1.11
 
 # DBus headers/libs
 DBUS_INC_LIB=`pkg-config --cflags --libs dbus-1`
@@ -24,8 +24,8 @@ idl: src/components/sbIMpris.idl
 	cd src/components && $(XUL_SDK)/bin/xpidl -m header -I$(XUL_SDK)/idl sbIMpris.idl && $(XUL_SDK)/bin/xpidl -m typelib -w -v -I$(XUL_SDK)/idl sbIMpris.idl
 
 package:
-	sed '8s/VERSION_NUMBER/$(VERSION)/' src/install.rdf > install.rdf
-	cd src/ && zip -r Mpris-$(VERSION).xpi components/ chrome/ platform/ defaults/ install.rdf chrome.manifest -x@zip-exclude.txt
+	sed -i '8s/em:version>[^<]*/em:version>$(VERSION)/' src/install.rdf
+	cd src/ && zip -r ../dist/Mpris-$(VERSION).xpi components/ chrome/ platform/ defaults/ install.rdf chrome.manifest -x@zip-exclude.txt
 
 clean: 
 	rm src/components/sbIMpris.h
@@ -35,6 +35,3 @@ deps:
 	sudo aptitude install build-essential
 	sudo aptitude install xulrunner-dev
 	sudo aptitude install libdbus-1-dev
-	
-	
-	

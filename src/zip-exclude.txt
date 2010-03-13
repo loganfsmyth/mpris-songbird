@@ -8,3 +8,8 @@ platform/Linux_x86_64-gcc3/components/.svn/*
 components/.svn/*
 chrome/.svn/*
 chrome/content/.svn/*
+
+chrome/content/icon.svg
+components/sbDbusConnection*
+components/sbIMpris.h
+components/sbIMpris.idl
