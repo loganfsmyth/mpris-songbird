@@ -48,17 +48,15 @@ print data['artist']
 
 Development
 -----------------------
-If you are running Ubuntu, you should be able to run:
-
-sudo make deps
+If you are running Ubuntu, you should be able to run "sudo make deps"
+to install the packages that you need to compile this extension.
 
 Packages:
  * build-essential	- compilers and standard libraries
  * libdbus-1-dev	- DBUS dev files for compiling dbus related programs
  * xulrunner-dev	- Mozilla development libraries
 
-to install the packages that you need to compile this extension. After that,
-you should be able to modify the code in the src/components directory.
+After that, you should be able to modify the code in the src/components directory.
 
 The important files are:
 
