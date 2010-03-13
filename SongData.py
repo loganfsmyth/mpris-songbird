@@ -13,6 +13,3 @@ else:
 data = object.GetMetadata()
 print data['title']
 print data['artist']
-
-
-object.SetMetadata('rating', 'OMG');
