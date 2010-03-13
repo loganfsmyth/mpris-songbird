@@ -31,6 +31,4 @@ clean:
 	rm src/components/sbIMpris.xpt
 
 deps: 
-	sudo aptitude install build-essential
-	sudo aptitude install xulrunner-dev
-	sudo aptitude install libdbus-1-dev
+	aptitude install build-essential xulrunner-dev libdbus-1-dev
