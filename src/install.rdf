@@ -5,7 +5,7 @@
     <em:id>{0a067f25-b5fa-4530-9396-fc7088a05415}</em:id>
     <em:type>2</em:type>
     <em:name>MPRIS</em:name>
-    <em:version>0.1.12</em:version>
+    <em:version>0.1.11</em:version>
     <em:creator>Logan Smyth</em:creator>
     <em:description>Adds support for the MPRIS media player communication/control protocol</em:description>
     <em:iconURL>chrome://mpris/content/icon.png</em:iconURL>
@@ -15,8 +15,8 @@
     <em:targetApplication>
       <Description>
         <em:id>songbird@songbirdnest.com</em:id>
-        <em:minVersion>1.2.0</em:minVersion>
-        <em:maxVersion>1.10.0a</em:maxVersion>
+        <em:minVersion>1.8.0</em:minVersion>
+        <em:maxVersion>1.9.0a</em:maxVersion>
       </Description>
     </em:targetApplication>
 
