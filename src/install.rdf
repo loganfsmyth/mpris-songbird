@@ -9,7 +9,7 @@
     <em:creator>Logan Smyth</em:creator>
     <em:description>Adds support for the MPRIS media player communication/control protocol</em:description>
     <em:iconURL>chrome://mpris/content/icon.png</em:iconURL>
-    <em:homepageURL>http://logansmyth.com/mpris-songbird-extension</em:homepageURL>
+    <em:homepageURL>http://logansmyth.com/project/mpris-songbird-extension</em:homepageURL>
     <em:optionsURL>chrome://mpris/content/options.xul</em:optionsURL>
     
     <em:targetApplication>
