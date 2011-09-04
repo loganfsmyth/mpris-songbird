@@ -31,25 +31,27 @@ For example:
 
 Sample Code
 -----------
-#!/usr/bin/env python
-import dbus
-bus = dbus.SessionBus()
-object = bus.get_object('org.mpris.songbird', '/Player')
-stat = object.GetStatus()
-if stat[0] == 0:
-  print "Playing"
-elif stat[0] == 1:
-  print "Paused"
-else:
-  print "Stopped"
-  
-data = object.GetMetadata()
-print data['title']
-print data['artist']
+
+> #!/usr/bin/env python
+> import dbus
+> bus = dbus.SessionBus()
+> object = bus.get_object('org.mpris.songbird', '/Player')
+> stat = object.GetStatus()
+> if stat[0] == 0:
+>   print "Playing"
+> elif stat[0] == 1:
+>   print "Paused"
+> else:
+>   print "Stopped"
+>
+> data = object.GetMetadata()
+> print data['title']
+> print data['artist']
 
 
 Development
 -----------
+
 If you are running Ubuntu, you should be able to run "sudo make deps"
 to install the packages that you need to compile this extension.
 
@@ -71,6 +73,7 @@ sbDbusConnectionPlugin.cpp
 
 Notes
 -----
+
 This is the only Mozilla that I've ever made, so sorry 
 if it has errors or memory leaks or does something wrong :P
 
