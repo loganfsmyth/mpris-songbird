@@ -6,6 +6,7 @@ This extensions provides an MPRIS interface for controlling Songbird through the
 This allows for changing tracks, volume and position, prev/next, play/pause/stop, as well as allows for retrieval of metadata on songs.
 
 This supports almost all MPRIS functionality, except for:
+
 * AddTrack method
 * DelTrack method
 * GetCaps method just says everything works
@@ -21,12 +22,13 @@ Uses
 
 This will allow query/control with anything using the MPRIS protocol.
 For example:
-  * Pidgin MusicTracker
-  * AMSN Music plugin
-    * May need to install libqt4-dbus for the program qdbus
-  * Panflute, Gnome music applet (0.6.0 branch)
-  * mpris-remote, command line tool
-  * CoverGloobus, coverart/lyrics display
+
+* Pidgin MusicTracker
+* AMSN Music plugin
+ * May need to install libqt4-dbus for the program qdbus
+* Panflute, Gnome music applet (0.6.0 branch)
+* mpris-remote, command line tool
+* CoverGloobus, coverart/lyrics display
 
 
 Sample Code
@@ -56,19 +58,20 @@ If you are running Ubuntu, you should be able to run "sudo make deps"
 to install the packages that you need to compile this extension.
 
 Packages:
- * build-essential	- compilers and standard libraries
- * libdbus-1-dev	- DBUS dev files for compiling dbus related programs
- * xulrunner-dev	- Mozilla development libraries
+
+* build-essential - compilers and standard libraries
+* libdbus-1-dev   - DBUS dev files for compiling dbus related programs
+* xulrunner-dev   - Mozilla development libraries
 
 After that, you should be able to modify the code in the src/components directory.
 
 The important files are:
 
-sbIMpris.idl
-sbMprisPlugin.js
-sbDbusConnection.h
-sbDbusConnection.cpp
-sbDbusConnectionPlugin.cpp
+* sbIMpris.idl
+* sbMprisPlugin.js
+* sbDbusConnection.h
+* sbDbusConnection.cpp
+* sbDbusConnectionPlugin.cpp
 
 
 Notes
