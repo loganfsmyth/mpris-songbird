@@ -77,6 +77,6 @@ The important files are:
 Notes
 -----
 
-This is the only Mozilla that I've ever made, so sorry 
+This is the only Mozilla extension that I've ever made, so sorry
 if it has errors or memory leaks or does something wrong :P
 
