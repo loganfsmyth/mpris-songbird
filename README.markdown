@@ -1,6 +1,7 @@
 
 General Info
------------------------
+------------
+
 This extensions provides an MPRIS interface for controlling Songbird through the Linux DBUS.
 This allows for changing tracks, volume and position, prev/next, play/pause/stop, as well as allows for retrieval of metadata on songs.
 
@@ -16,7 +17,8 @@ If you want them implemented, leave a comment!
 
 
 Uses
------------------------
+----
+
 This will allow query/control with anything using the MPRIS protocol.
 For example:
   * Pidgin MusicTracker
@@ -28,7 +30,7 @@ For example:
 
 
 Sample Code
------------------------
+-----------
 #!/usr/bin/env python
 import dbus
 bus = dbus.SessionBus()
@@ -47,7 +49,7 @@ print data['artist']
 
 
 Development
------------------------
+-----------
 If you are running Ubuntu, you should be able to run "sudo make deps"
 to install the packages that you need to compile this extension.
 
@@ -68,7 +70,7 @@ sbDbusConnectionPlugin.cpp
 
 
 Notes
------------------------
+-----
 This is the only Mozilla that I've ever made, so sorry 
 if it has errors or memory leaks or does something wrong :P
 
