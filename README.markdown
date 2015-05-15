@@ -1,4 +1,10 @@
 
+Deprecated long ago
+------------
+
+Songbird no longer exists. [Nightingale](http://getnightingale.com/), the public fork of Songbird, has incorporated this code, so this functionality should be installed by default when using Nightingale.
+
+
 General Info
 ------------
 
