@@ -2,7 +2,7 @@
 Deprecated long ago
 ------------
 
-Songbird no longer exists. [Nightingale](http://getnightingale.com/), the public fork of Songbird, has incorporated this code, so this functionality should be installed by default when using Nightingale.
+Songbird no longer exists. [Nightingale](http://getnightingale.com/), the public fork of Songbird, [has incorporated this code](http://blog.getnightingale.com/2014/07/22/new-monthly-community-update/), so this functionality should be available by default when using Nightingale.
 
 
 General Info
